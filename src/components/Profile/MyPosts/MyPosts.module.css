@@ -1,0 +1,18 @@
+.content {
+   grid-area: c;
+   background-color: #f1f2f4;
+}
+
+.content img {
+   width: 100%;
+}
+
+.item {
+   color:#865c02;
+}
+
+.content_description {
+   padding-top: 15px;
+   padding-bottom: 15px;
+   padding-left: 15px;
+}

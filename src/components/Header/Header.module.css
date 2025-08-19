@@ -1,0 +1,8 @@
+.header {
+   grid-area: h;
+   background-color: #f4e4a9;
+}
+
+.header img {
+   width: 60px;
+}
