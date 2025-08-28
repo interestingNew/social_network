@@ -1,14 +1,14 @@
 import c from "./MyPosts.module.css"
 import { Post } from "./Post/Post"
+import { ArrayPostsType } from "../../.."
 
-export const MyPosts = () => {
+type PostsProps = {
+      posts: ArrayPostsType
+}
 
-   let posts = [
-      { message: "Bring sport into your life", countLike: 189 },
-      { message: "Always develop", countLike: 295 }
-   ]
+export const MyPosts = (props: PostsProps) => {
 
-   let postsElement = posts.map(p => <Post message={p.message} countLike={p.countLike} />)
+   let postsElement = props.posts.map(p => <Post message={p.message} countLike={p.countLike} />)
 
    return <div className={c.item}>
       <h3>My Posts</h3>
