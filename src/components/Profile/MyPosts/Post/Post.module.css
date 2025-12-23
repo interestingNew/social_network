@@ -1,0 +1,7 @@
+.imageMessage {
+   display: flex;
+}
+
+.message {
+   align-self: center;
+}

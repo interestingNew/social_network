@@ -1,0 +1,12 @@
+.dialog {
+   display: flex;
+}
+
+.link {
+   align-self: center;
+}
+
+.active {
+   color: #f1f2f4;
+   text-shadow: 1px 1px 3px #7e47be;
+}

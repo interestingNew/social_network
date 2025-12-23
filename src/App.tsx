@@ -7,27 +7,28 @@ import { News } from './components/Navbar/News/News';
 import { Music } from './components/Navbar/Music/Music';
 import { Settings } from './components/Navbar/Settings/Settings';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ArrayPostsType, ArrayDialogsType, ArrayMessagesType } from '.';
+import { StateType } from './redux/state';
+import { Friends } from './components/Navbar/Friends/Friends';
+import { storeType } from './redux/state';
 
-type PostsProps = {
-  posts: ArrayPostsType
-  dialogs:ArrayDialogsType
-  messages: ArrayMessagesType
+type AppProps = {
+  store: storeType
 }
 
-const App = (props: PostsProps) => {
+const App = (props: AppProps) => {
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
-        <Navbar />
+        <Navbar state={props.store.getState().sideBar}/>
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='profile' element={<Profile posts={props.posts}/>} />
-            <Route path='dialogs/*' element={<Dialogs dialogs={props.dialogs} messages={props.messages}/>} />
+            <Route path='profile' element={<Profile state={props.store.getState().profilePage} addNewPostItem={props.store.addNewPostItem.bind(props.store)} updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>} />
+            <Route path='dialogs/*' element={<Dialogs state={props.store.getState().dialogsPage} updateNewMessageText={props.store.updateNewMessageText.bind(props.store)} addNewMessageItem={props.store.addNewMessageItem.bind(props.store)}/>} />
             <Route path='news' element={<News />} />
             <Route path='music' element={<Music />} />
             <Route path='settings' element={<Settings />} />
+            <Route path='friends' element={<Friends />} />
           </Routes>
         </div>
       </div>

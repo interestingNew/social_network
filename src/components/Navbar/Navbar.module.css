@@ -17,3 +17,12 @@
 a {
    text-decoration: none;
 }
+
+.friendsWrapper {
+   display: flex;
+   flex-direction: column;
+}
+
+.friends {
+   display: flex;
+}
