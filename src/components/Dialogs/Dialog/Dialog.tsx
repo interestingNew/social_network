@@ -12,14 +12,19 @@ type isActiveType = {
 const setActive = ({ isActive }: isActiveType) => (isActive ? c.active : '')
 
 export const Dialog = (props: DialogPropsType) => {
-   const path = "/dialogs/" + props.id
+   const {
+      name,
+      id
+   } = props
+
+   const path = "/dialogs/" + id
    return (
       <div className={c.dialog}>
          <div className={c.image}>
-            <img src="./pozitiv_smailik.jpg" alt="аватар" />
+            <img src="/pozitiv_smailik.jpg" alt="аватар" />
          </div>
          <div className={c.link}>
-            <NavLink className={setActive} to={path}>{props.name}</NavLink>
+            <NavLink className={setActive} to={path}>{name}</NavLink>
          </div>
       </div>
    )

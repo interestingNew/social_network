@@ -1,41 +1,41 @@
-import { useRef } from "react"
 import c from "./MyPosts.module.css"
 import { Post } from "./Post/Post"
-import { ArrayPostsType } from "../../../redux/state"
+import { ActionsType, ArrayPostsType } from "../../../redux/state"
+import { AddNewPostAC, UpdateNewPostTextAC } from "../../../redux/profile-reducer"
 
 type PostsProps = {
-      posts: ArrayPostsType
-      newPostText: string
-      addNewPostItem: (newValue: string) => void
-      updateNewPostText: (newPostText: string) => void
+   posts: ArrayPostsType
+   newPostText: string
+   addPost: () => void
+   updateNewPostText: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 export const MyPosts = (props: PostsProps) => {
+   const {
+      posts,
+      newPostText,
+      addPost,
+      updateNewPostText
+   } = props
 
-   let postsElement = props.posts.map(p => <Post message={p.message} countLike={p.countLike} />)
+   let postsElement = posts.map(p => <Post message={p.message} countLike={p.countLike} />)
 
-   let textAreaRef = useRef<HTMLTextAreaElement>(null)
-
-   const addNewPost = () => {
-      if(textAreaRef.current?.value.trim()) {
-         props.addNewPostItem(textAreaRef.current.value)
-      }
+   const onAddPost = () => {
+      addPost()
    }
 
-   const onChangeHandler = () => {
-      if(textAreaRef.current?.value.trim()) {
-         props.updateNewPostText(textAreaRef.current.value)
-      }
+   const onPostChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+      updateNewPostText(e)
    }
 
    return <div className={c.item}>
       <h3>My Posts</h3>
       <div>
          <div>
-            <textarea ref={textAreaRef} onChange={onChangeHandler} value={props.newPostText}></textarea>
+            <textarea onChange={onPostChange} value={newPostText}></textarea>
          </div>
          <div>
-            <button onClick={addNewPost}>add</button>
+            <button onClick={onAddPost}>add</button>
          </div>
       </div>
       <div>

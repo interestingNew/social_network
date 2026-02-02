@@ -15,8 +15,11 @@ type isActiveType = {
 const setActive = ({ isActive }: isActiveType) => (isActive ? c.active : '')
 
 export const Navbar = (props: NavbarPropsType) => {
+   const {
+      state
+   } = props
 
-   let friends = props.state.friends.map(f => <Friend name={f.name} id={f.id} />)
+   let friends = state.friends.map(f => <Friend name={f.name} id={f.id} />)
 
    return <nav className={c.nav}>
       <div className={c.item}><NavLink className={setActive} to="/profile">Profile</NavLink></div>
