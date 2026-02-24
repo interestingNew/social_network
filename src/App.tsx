@@ -11,6 +11,7 @@ import { SideBarType } from './redux/types';
 import { useSelector } from 'react-redux';
 import { StateType } from './redux/state-redux';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import { UsersContainer } from './components/Users/UsersContainer';
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
           <Routes>
             <Route path='profile' element={<Profile />} />
             <Route path='dialogs/*' element={<DialogsContainer />} />
+            <Route path='users/' element={<UsersContainer />} />
             <Route path='news' element={<News />} />
             <Route path='music' element={<Music />} />
             <Route path='settings' element={<Settings />} />

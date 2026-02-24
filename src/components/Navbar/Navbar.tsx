@@ -24,6 +24,7 @@ export const Navbar = (props: NavbarPropsType) => {
    return <nav className={c.nav}>
       <div className={c.item}><NavLink className={setActive} to="/profile">Profile</NavLink></div>
       <div className={c.item}><NavLink className={setActive} to="/dialogs">Messages</NavLink></div>
+      <div className={c.item}><NavLink className={setActive} to="/users">Users</NavLink></div>
       <div className={c.item}><NavLink className={setActive} to="/news">News</NavLink></div>
       <div className={c.item}><NavLink className={setActive} to="/music">Music</NavLink></div>
       <div className={c.item}><NavLink className={setActive} to="/settings">Settings</NavLink></div>

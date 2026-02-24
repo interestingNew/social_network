@@ -1,5 +1,4 @@
-import { ProfilePageType } from "./state";
-import { ActionsType } from "./state";
+import { ActionsType, ProfilePageType } from "./types";
 
 export const AddNewPostAC = () => ({ type: "ADD-POST" } as const);
 export const UpdateNewPostTextAC = (text: string) => {
@@ -34,5 +33,3 @@ export const profileReducer = (
          return state;
    }
 };
-
-export default profileReducer;

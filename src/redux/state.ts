@@ -1,6 +1,6 @@
-import dialogsReducer, { AddNewMessageType, UpdateNewMessageTextType } from "./dialogs-reducer";
-import profileReducer, { AddNewPostType, UpdateNewPostTextType } from "./profile-reducer";
-import sideBarReducer from "./sidebar-reducer";
+import { dialogsReducer, AddNewMessageType, UpdateNewMessageTextType } from "./dialogs-reducer";
+import { profileReducer, AddNewPostType, UpdateNewPostTextType } from "./profile-reducer";
+import { sideBarReducer } from "./sidebar-reducer";
 
 export type ActionsType = AddNewPostType | UpdateNewPostTextType | AddNewMessageType | UpdateNewMessageTextType
 
