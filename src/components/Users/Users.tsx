@@ -4,37 +4,40 @@ import axios from 'axios';
 import userPhoto from '../../images/userPhoto.jpg';
 
 type UsersTypeProps = {
-   state: UsersPageType;
+   users: UsersType;
    follow: (id: number) => void;
    unfollow: (id: number) => void;
    setUsers: (users: UsersType) => void;
 };
 
 export const Users = ({
-   state,
+   users,
    follow,
    unfollow,
    setUsers,
 }: UsersTypeProps) => {
 
-   if (state.users.length === 0) {
+let getUsers = () => {
+   if (users.length === 0) {
       
       axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
-         debugger
          setUsers(response.data.items)
       })
    }
+}
+   
 
    return (
       <div>
-         {state.users.map((u) => (
+         <button onClick={getUsers}>Get Users</button>
+         {users.map((u) => (
             <div className={c.user} key={u.id}>
                <div>
                   <div>
                      <img className={c.avatar} src={userPhoto} />
                   </div>
                   <div>
-                     {u.followed ? (
+                     {u.followed? (
                         <button
                            onClick={() => {
                               unfollow(u.id);

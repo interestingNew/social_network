@@ -3,10 +3,11 @@ import { StateType } from "../../redux/state-redux";
 import { AppDispatch, UsersType } from "../../redux/types";
 import { FollowAC, SetUsersAC, UnfollowAC } from "../../redux/users-reducer";
 import { Users } from "./Users";
+import UsersC from "./UsersC";
 
 let mapStateToProps = (state: StateType) => {
    return {
-      state: state.usersPage
+      users: state.usersPage.users
    };
 };
 
@@ -27,4 +28,4 @@ let mapDispatchToProps = (dispatch: AppDispatch) => {
 export const UsersContainer = connect(
    mapStateToProps,
    mapDispatchToProps
-)(Users);
+)(UsersC);
