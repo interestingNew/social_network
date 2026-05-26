@@ -3,6 +3,10 @@
    margin: 20px;
 }
 
+.selectedPage {
+   font-weight: bold;
+}
+
 .discriptionUser {
    display: grid;
    grid-template-areas: 'A B'

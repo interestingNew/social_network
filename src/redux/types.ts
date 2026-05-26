@@ -1,7 +1,7 @@
 import { AddNewPostType, UpdateNewPostTextType } from "./profile-reducer";
 import { AddNewMessageType, UpdateNewMessageTextType } from "./dialogs-reducer";
 import { Dispatch } from "redux";
-import { FollowType, SetUsersType, UnfollowType } from "./users-reducer";
+import { FollowType, SetCurrentPageType, SetUsersType, UnfollowType } from "./users-reducer";
 
 
 export type ActionsType =
@@ -11,7 +11,8 @@ export type ActionsType =
    | UpdateNewMessageTextType
    | FollowType
    | UnfollowType
-   | SetUsersType;
+   | SetUsersType
+   | SetCurrentPageType;
 
 export type AppDispatch = Dispatch<ActionsType>
 
@@ -51,7 +52,7 @@ type UserType = {
    uniqueUrlName: null,
    photos: {
       small: null,
-     large: null
+      large: null
    },
    status: null,
    followed: boolean
@@ -72,5 +73,8 @@ export type SideBarType = {
    friends: ArrayDialogsType;
 };
 export type UsersPageType = {
-   users: UsersType
+   users: UsersType,
+   pageSize: number,
+   totalUsersCount: number,
+   currentPage: number
 }
