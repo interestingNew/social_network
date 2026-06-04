@@ -1,4 +1,4 @@
-import { ActionsType, DialogsPageType } from "./types";
+import { DialogsActionsType, DialogsPageType } from "./types";
 
 export const AddNewMessageAC = () =>
   ({ type: "ADD-NEW-MESSAGE-ITEM" } as const);
@@ -28,7 +28,7 @@ const initialState: DialogsPageType = {
 
 export const dialogsReducer = (
   state: DialogsPageType = initialState,
-  action: ActionsType
+  action: DialogsActionsType
 ) => {
   switch (action.type) {
     case "ADD-NEW-MESSAGE-ITEM": 

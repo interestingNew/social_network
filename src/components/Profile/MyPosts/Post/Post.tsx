@@ -15,7 +15,7 @@ export const Post = (props: Props) => {
       <div className={c.item}>
          <div className={c.imageMessage}>
             <div className={c.image}>
-               <img src="./pozitiv_smailik.jpg" alt="аватар" />
+               <img src="/pozitiv_smailik.jpg" alt="аватар" />
             </div>
             <div className={c.message}>
                {message}

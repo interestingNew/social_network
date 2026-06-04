@@ -1,43 +1,105 @@
-import { AddNewPostType, UpdateNewPostTextType } from "./profile-reducer";
+import {
+   AddNewPostType,
+   setUserProfileType,
+   UpdateNewPostTextType,
+} from "./profile-reducer";
 import { AddNewMessageType, UpdateNewMessageTextType } from "./dialogs-reducer";
 import { Dispatch } from "redux";
-import { FollowType, SetCurrentPageType, SetUsersType, UnfollowType } from "./users-reducer";
+import {
+   FollowType,
+   SetCurrentPageType,
+   SetUsersType,
+   ToggleIsFetchingType,
+   ToggleFollowingProgress,
+   UnfollowType,
+} from "./users-reducer";
+import { SetUserDateType } from "./auth-reducer";
 
-
-export type ActionsType =
-   | AddNewPostType
-   | UpdateNewPostTextType
-   | AddNewMessageType
-   | UpdateNewMessageTextType
+export type UsersActionsType =
    | FollowType
    | UnfollowType
    | SetUsersType
-   | SetCurrentPageType;
+   | SetCurrentPageType
+   | ToggleIsFetchingType
+   | ToggleFollowingProgress;
+export type ProfileActionsType =
+   | AddNewPostType
+   | UpdateNewPostTextType
+   | setUserProfileType;
+export type DialogsActionsType = 
+   | AddNewMessageType
+   | UpdateNewMessageTextType;
+export type AuthActionsType = 
+   | SetUserDateType;
 
-export type AppDispatch = Dispatch<ActionsType>
+
+export type AppDispatch = Dispatch<UsersActionsType | ProfileActionsType | DialogsActionsType | AuthActionsType>;
 
 
+export type ProfilePageType = {
+   posts: ArrayPostsType;
+   newPostText: string;
+   profile: ProfileType | null;
+};
 type PostType = {
    message: string;
    countLike: number;
 };
 export type ArrayPostsType = Array<PostType>;
+export type ProfileType = {
+   aboutMe: string|null;
+   contacts: {
+      facebook: string|null;
+      website: string|null;
+      vk: string|null;
+      twitter: string|null;
+      instagram: string|null;
+      youtube: string|null;
+      github: string|null;
+      mainLink: string|null;
+   };
+   lookingForAJob: boolean;
+   lookingForAJobDescription: string|null;
+   fullName: string;
+   userId: number;
+   photos: {
+      small: string|null;
+      large: string|null;
+   };
+};
 
 
+export type DialogsPageType = {
+   dialogs: ArrayDialogsType;
+   messages: ArrayMessagesType;
+   newMessageText: string;
+};
 type DialogType = {
    id: number;
    name: string;
 };
 export type ArrayDialogsType = Array<DialogType>;
-
-
 type MessageType = {
    id: number;
    message: string;
 };
 export type ArrayMessagesType = MessageType[];
 
-type UserType = {
+
+export type SideBarType = {
+   friends: ArrayDialogsType;
+};
+
+
+export type UsersPageType = {
+   users: UsersType;
+   pageSize: number;
+   totalUsersCount: number;
+   currentPage: number;
+   isFetching: boolean;
+   isFollowingProgress: number[];
+};
+export type UserType = {
    // id: number,
    // fullname: string,
    // follow: boolean,
@@ -47,34 +109,22 @@ type UserType = {
    //    country: string
    // },
    // avatar: string
-   name: string,
-   id: number,
-   uniqueUrlName: null,
+   name: string;
+   id: number;
+   uniqueUrlName: null;
    photos: {
-      small: null,
-      large: null
-   },
-   status: null,
-   followed: boolean
-}
-export type UsersType = Array<UserType>
+      small: null;
+      large: null;
+   };
+   status: null;
+   followed: boolean;
+};
+export type UsersType = Array<UserType>;
 
 
-export type ProfilePageType = {
-   posts: ArrayPostsType;
-   newPostText: string;
-};
-export type DialogsPageType = {
-   dialogs: ArrayDialogsType;
-   messages: ArrayMessagesType;
-   newMessageText: string;
-};
-export type SideBarType = {
-   friends: ArrayDialogsType;
-};
-export type UsersPageType = {
-   users: UsersType,
-   pageSize: number,
-   totalUsersCount: number,
-   currentPage: number
+export type AuthDataType = {
+   id: number|null,
+   login: string|null,
+   email: string|null,
+   isAuth: boolean
 }

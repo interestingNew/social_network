@@ -1,6 +1,8 @@
 import { UsersType } from "../../redux/types";
 import c from "./Users.module.css";
 import userPhoto from "../../images/userPhoto.jpg";
+import { NavLink } from "react-router-dom";
+import { usersAPI } from "../../api/api";
 
 type UsersTypeProps = {
    users: UsersType;
@@ -10,22 +12,25 @@ type UsersTypeProps = {
    follow: (id: number) => void;
    unfollow: (id: number) => void;
    onPageChanged: (pageNumber: number) => void;
-}
+   isFollowingProgress: number[];
+   toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
+};
 
 export const Usersss = ({
    users,
-      pageSize,
-      totalUsersCount,
-      currentPage,
-      follow,
-      unfollow,
-      onPageChanged
+   pageSize,
+   totalUsersCount,
+   currentPage,
+   follow,
+   unfollow,
+   onPageChanged,
+   isFollowingProgress,
+   toggleFollowingProgress
 }: UsersTypeProps) => {
-
    let pagesCount = Math.ceil(totalUsersCount / pageSize);
    let pages = [];
    for (let i = 1; i <= pagesCount; i++) {
-         pages.push(i);
+      pages.push(i);
    }
 
    return (
@@ -45,26 +50,49 @@ export const Usersss = ({
             <div className={c.user} key={u.id}>
                <div>
                   <div>
-                     <img className={c.avatar} src={userPhoto} />
+                     <NavLink to={"/profile/" + u.id}>
+                        <img
+                           className={c.avatar}
+                           src={
+                              u.photos.small !== null
+                                 ? u.photos.small
+                                 : userPhoto
+                           }
+                        />
+                     </NavLink>
                   </div>
                   <div>
-                  {u.followed ? (
-                     <button
-                        onClick={() => {
-                           unfollow(u.id);
-                        }}
-                     >
-                        Unfollow
-                     </button>
-                  ) : (
-                     <button
-                        onClick={() => {
-                           follow(u.id);
-                        }}
-                     >
-                        Follow
-                     </button>
-                  )}
+                     {u.followed ? (
+                        <button disabled={isFollowingProgress.some(id => id === u.id)}
+                           onClick={() => {
+                              toggleFollowingProgress(true, u.id)
+                              usersAPI.unfollowUser(u.id)
+                                 .then((response) => {
+                                    if(response.data.resultCode == 0) {
+                                       unfollow(u.id);
+                                    }
+                                    toggleFollowingProgress(false, u.id)
+                                 });
+                           }}
+                        >
+                           Unfollow
+                        </button>
+                     ) : (
+                        <button disabled={isFollowingProgress.some(id => id === u.id)}
+                           onClick={() => {
+                              toggleFollowingProgress(true, u.id)
+                              usersAPI.followUser(u.id)
+                                 .then((response) => {
+                                    if(response.data.resultCode == 0) {
+                                       follow(u.id);
+                                    }
+                                    toggleFollowingProgress(false, u.id)
+                                 });
+                           }}
+                        >
+                           Follow
+                        </button>
+                     )}
                   </div>
                </div>
                <div className={c.discriptionUser}>
@@ -78,7 +106,3 @@ export const Usersss = ({
       </div>
    );
 };
-
-
-
-

@@ -1,6 +1,6 @@
 import c from "./Navbar.module.css"
 import { NavLink } from "react-router-dom"
-import { ArrayDialogsType } from '../../redux/state'
+import { ArrayDialogsType } from '../../redux/types'
 import { Friend } from "./Friends/Friend"
 
 type NavbarPropsType = {

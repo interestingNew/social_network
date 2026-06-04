@@ -1,7 +1,5 @@
 import './App.css';
-import { Header } from './components/Header/Header';
 import { Navbar } from './components/Navbar/Navbar';
-import { Profile } from './components/Profile/Profile';
 import { News } from './components/Navbar/News/News';
 import { Music } from './components/Navbar/Music/Music';
 import { Settings } from './components/Navbar/Settings/Settings';
@@ -12,6 +10,8 @@ import { useSelector } from 'react-redux';
 import { StateType } from './redux/state-redux';
 import { DialogsContainer } from './components/Dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
+import { ProfileContainerWrapper } from './components/Profile/ProfileContainerWrapper';
+import { HeaderContainer } from './components/Header/HeaderContainer';
 
 const App = () => {
 
@@ -19,11 +19,11 @@ const App = () => {
 
   return (
       <div className='app-wrapper'>
-        <Header />
+        <HeaderContainer />
         <Navbar state={sideBar}/>
         <div className='app-wrapper-content'>
           <Routes>
-            <Route path='profile' element={<Profile />} />
+            <Route path='profile/:userId?' element={<ProfileContainerWrapper />} />
             <Route path='dialogs/*' element={<DialogsContainer />} />
             <Route path='users/' element={<UsersContainer />} />
             <Route path='news' element={<News />} />

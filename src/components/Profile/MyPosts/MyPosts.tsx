@@ -1,7 +1,6 @@
 import c from "./MyPosts.module.css"
 import { Post } from "./Post/Post"
-import { ActionsType, ArrayPostsType } from "../../../redux/state"
-import { AddNewPostAC, UpdateNewPostTextAC } from "../../../redux/profile-reducer"
+import { ArrayPostsType } from "../../../redux/types"
 
 type PostsProps = {
    posts: ArrayPostsType

@@ -1,13 +1,18 @@
 import c from "./Profile.module.css";
 import { ProfileInfo } from "./ProfileInfo/ProfileInfo";
 import { MyPostsContainer } from "./MyPosts/MyPostsContainer";
+import { ProfileType } from "../../redux/types";
 
 
-export const Profile = () => {
+type ProfilePropsType = {
+   setUserProfile: (profile: ProfileType) => void
+   profile: ProfileType
+}
 
+export const Profile = (props: ProfilePropsType) => {
    return (
       <div className={c.content}>
-         <ProfileInfo />
+         <ProfileInfo {...props}/>
          <MyPostsContainer />
       </div>
    );

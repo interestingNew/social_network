@@ -1,7 +1,7 @@
 import c from "./Dialogs.module.css"
 import { Dialog } from "./Dialog/Dialog"
 import { Message } from "./Message/Message"
-import { ArrayDialogsType, ArrayMessagesType } from "../../redux/state"
+import { ArrayDialogsType, ArrayMessagesType } from "../../redux/types"
 
 type DialogsProps = {
    state: {
