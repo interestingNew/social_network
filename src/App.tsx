@@ -8,10 +8,11 @@ import { Friends } from './components/Navbar/Friends/Friends';
 import { SideBarType } from './redux/types';
 import { useSelector } from 'react-redux';
 import { StateType } from './redux/state-redux';
-import { DialogsContainer } from './components/Dialogs/DialogsContainer';
+import { DialogsContainerRedirect } from './components/Dialogs/DialogsContainer';
 import { UsersContainer } from './components/Users/UsersContainer';
 import { ProfileContainerWrapper } from './components/Profile/ProfileContainerWrapper';
 import { HeaderContainer } from './components/Header/HeaderContainer';
+import { Login } from './components/Login/Login';
 
 const App = () => {
 
@@ -24,8 +25,9 @@ const App = () => {
         <div className='app-wrapper-content'>
           <Routes>
             <Route path='profile/:userId?' element={<ProfileContainerWrapper />} />
-            <Route path='dialogs/*' element={<DialogsContainer />} />
+            <Route path='dialogs/*' element={<DialogsContainerRedirect />} />
             <Route path='users/' element={<UsersContainer />} />
+            <Route path='/login' element={<Login />} />
             <Route path='news' element={<News />} />
             <Route path='music' element={<Music />} />
             <Route path='settings' element={<Settings />} />

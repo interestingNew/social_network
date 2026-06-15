@@ -2,7 +2,6 @@ import { UsersType } from "../../redux/types";
 import c from "./Users.module.css";
 import userPhoto from "../../images/userPhoto.jpg";
 import { NavLink } from "react-router-dom";
-import { usersAPI } from "../../api/api";
 
 type UsersTypeProps = {
    users: UsersType;
@@ -13,7 +12,6 @@ type UsersTypeProps = {
    unfollow: (id: number) => void;
    onPageChanged: (pageNumber: number) => void;
    isFollowingProgress: number[];
-   toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
 };
 
 export const Usersss = ({
@@ -24,8 +22,7 @@ export const Usersss = ({
    follow,
    unfollow,
    onPageChanged,
-   isFollowingProgress,
-   toggleFollowingProgress
+   isFollowingProgress
 }: UsersTypeProps) => {
    let pagesCount = Math.ceil(totalUsersCount / pageSize);
    let pages = [];
@@ -65,14 +62,7 @@ export const Usersss = ({
                      {u.followed ? (
                         <button disabled={isFollowingProgress.some(id => id === u.id)}
                            onClick={() => {
-                              toggleFollowingProgress(true, u.id)
-                              usersAPI.unfollowUser(u.id)
-                                 .then((response) => {
-                                    if(response.data.resultCode == 0) {
-                                       unfollow(u.id);
-                                    }
-                                    toggleFollowingProgress(false, u.id)
-                                 });
+                              unfollow(u.id)
                            }}
                         >
                            Unfollow
@@ -80,14 +70,7 @@ export const Usersss = ({
                      ) : (
                         <button disabled={isFollowingProgress.some(id => id === u.id)}
                            onClick={() => {
-                              toggleFollowingProgress(true, u.id)
-                              usersAPI.followUser(u.id)
-                                 .then((response) => {
-                                    if(response.data.resultCode == 0) {
-                                       follow(u.id);
-                                    }
-                                    toggleFollowingProgress(false, u.id)
-                                 });
+                              follow(u.id)
                            }}
                         >
                            Follow

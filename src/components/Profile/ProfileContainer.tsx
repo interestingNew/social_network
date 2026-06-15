@@ -1,10 +1,10 @@
 import { connect } from "react-redux";
 import { Profile } from "./Profile";
 import React from "react";
-import { setUserProfile } from "../../redux/profile-reducer";
 import { StateType } from "../../redux/state-redux";
-import { ProfileType } from "../../redux/types";
-import { profileAPI } from "../../api/api";
+import { getProfile } from "../../redux/profile-reducer";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 type OwnPropsType = {
@@ -12,7 +12,7 @@ type OwnPropsType = {
 }
 type MapStatePropsType = ReturnType<typeof mapStateToProps>;
 type MapDispatchPropsType = {
-   setUserProfile: (profile: ProfileType) => void
+   getProfile: (userId: string) => void
 }
 
 export type ProfileAPITypeProps = OwnPropsType & MapStatePropsType & MapDispatchPropsType
@@ -23,16 +23,11 @@ class ProfileAPIContainer extends React.Component<ProfileAPITypeProps> {
       if(!userId) {
          userId = "2"
       }
-      profileAPI.getProfile(userId)
-         .then((response) => {
-            this.props.setUserProfile(response.data);
-         });
+      this.props.getProfile(userId)
    }
 
    render() {
-      return (
-         <Profile {...this.props} />
-      )
+      return <Profile {...this.props} />
    }
 }
 
@@ -50,4 +45,17 @@ const mapStateToProps = (state: StateType) => {
 //    }
 // }
 
-export const ProfileContainer = connect<MapStatePropsType, MapDispatchPropsType, OwnPropsType, StateType>(mapStateToProps, {setUserProfile})(ProfileAPIContainer)
+
+export const ProfileContainerRedirect = compose(
+   withAuthRedirect,
+   connect(
+      mapStateToProps,
+      {getProfile}
+   )
+)(ProfileAPIContainer) as React.ComponentType<any>;
+
+// export const ProfileContainer = connect(
+//    mapStateToProps,
+//    {getProfile}
+// )(ProfileAPIContainer)
+// export const ProfileContainerRedirect = withAuthRedirect(ProfileContainer)

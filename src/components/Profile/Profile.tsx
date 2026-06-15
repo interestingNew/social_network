@@ -5,8 +5,8 @@ import { ProfileType } from "../../redux/types";
 
 
 type ProfilePropsType = {
-   setUserProfile: (profile: ProfileType) => void
-   profile: ProfileType
+   profile: ProfileType | null,
+   userId: string | undefined
 }
 
 export const Profile = (props: ProfilePropsType) => {

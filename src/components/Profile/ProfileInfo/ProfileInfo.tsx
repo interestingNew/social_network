@@ -1,12 +1,10 @@
-import { StateType } from "../../../redux/state-redux"
 import { ProfileType } from "../../../redux/types"
 import { Preloader } from "../../common/Loader/Preloader"
 import c from "./ProfileInfo.module.css"
 
 
 type ProfileInfoTypeProps = {
-   setUserProfile: (profile: ProfileType) => void
-   profile: ProfileType
+   profile: ProfileType | null
 }
 export const ProfileInfo = (props: ProfileInfoTypeProps) => {
    if(!props.profile) {

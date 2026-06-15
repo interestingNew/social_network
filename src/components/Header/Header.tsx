@@ -18,7 +18,7 @@ export const Header = ({isAuth, login, email, setAuthUserData}: HeaderPropsType)
          {isAuth? login : <NavLink to={"/login"}>Login</NavLink>}
       </div>
       <div className={c.emailBlock}>
-         {isAuth? email : <NavLink to={"/login"}>Login</NavLink>}
+         {isAuth? email : <NavLink to={"/login"}></NavLink>}
       </div>
       </div>
    </header>

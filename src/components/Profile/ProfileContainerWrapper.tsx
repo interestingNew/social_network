@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom"
-import { ProfileContainer } from "./ProfileContainer"
+import { ProfileContainerRedirect } from "./ProfileContainer"
 
 export const ProfileContainerWrapper = () => {
    const { userId } = useParams<{userId?: string}>()
    return (
       <>
-         <ProfileContainer userId={userId}/>
+         <ProfileContainerRedirect userId={userId}/>
       </>
    )
 }

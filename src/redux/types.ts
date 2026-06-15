@@ -4,7 +4,6 @@ import {
    UpdateNewPostTextType,
 } from "./profile-reducer";
 import { AddNewMessageType, UpdateNewMessageTextType } from "./dialogs-reducer";
-import { Dispatch } from "redux";
 import {
    FollowType,
    SetCurrentPageType,
@@ -33,13 +32,13 @@ export type AuthActionsType =
    | SetUserDateType;
 
 
-export type AppDispatch = Dispatch<UsersActionsType | ProfileActionsType | DialogsActionsType | AuthActionsType>;
+
 
 
 export type ProfilePageType = {
    posts: ArrayPostsType;
    newPostText: string;
-   profile: ProfileType | null;
+   profile: ProfileType;
 };
 type PostType = {
    message: string;

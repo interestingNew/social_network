@@ -4,8 +4,8 @@ import {
    UpdateNewPostTextAC,
 } from "../../../redux/profile-reducer";
 import { connect, useDispatch, useSelector } from "react-redux";
-import { StateType } from "../../../redux/state-redux";
-import { AppDispatch, ProfilePageType } from "../../../redux/types";
+import { AppDispatch, StateType } from "../../../redux/state-redux";
+import { ProfilePageType } from "../../../redux/types";
 
 
 const mapStateToProps = (state: StateType) => {

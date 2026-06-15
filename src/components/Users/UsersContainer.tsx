@@ -1,11 +1,10 @@
 import { connect } from "react-redux";
 import { StateType } from "../../redux/state-redux";
-import { AppDispatch, UsersType } from "../../redux/types";
-import { follow, setCurrentPage, setUsers, toggleFollowingProgress, toggleIsFetching, unfollow } from "../../redux/users-reducer";
+import { UsersType } from "../../redux/types";
+import { follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow } from "../../redux/users-reducer";
 import React from "react";
 import { Usersss } from "./Usersss";
 import { Preloader } from "../common/Loader/Preloader";
-import { usersAPI } from "../../api/api";
 
 
 export type UsersAPITypeProps = {
@@ -17,31 +16,19 @@ export type UsersAPITypeProps = {
    isFollowingProgress: number[];
    follow: (id: number) => void;
    unfollow: (id: number) => void;
-   setUsers: (users: UsersType) => void;
    setCurrentPage: (pageNumber: number) => void;
-   toggleIsFetching: (isFetching: boolean) => void;
-   toggleFollowingProgress: (isFetching: boolean, userId: number) => void;
+   getUsers: (currentPage: number, pageSize: number) => void
 };
 
 class UsersAPIContainer extends React.Component<UsersAPITypeProps> {
    //включаем 58 видео
    componentDidMount(): void {
-      this.props.toggleIsFetching(true)
-      usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-         .then((response) => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items);
-         });
+      this.props.getUsers(this.props.currentPage, this.props.pageSize)
    }
 
    onPageChanged = (pageNumber: number) => {
       this.props.setCurrentPage(pageNumber);
-      this.props.toggleIsFetching(true)
-      usersAPI.getUsers(pageNumber, this.props.pageSize)
-         .then((response) => {
-            this.props.toggleIsFetching(false)
-            this.props.setUsers(response.data.items);
-         });
+      this.props.getUsers(pageNumber, this.props.pageSize)
    };
 
    render() {
@@ -57,7 +44,6 @@ class UsersAPIContainer extends React.Component<UsersAPITypeProps> {
                onPageChanged={this.onPageChanged}
                users={this.props.users}
                isFollowingProgress={this.props.isFollowingProgress}
-               toggleFollowingProgress={this.props.toggleFollowingProgress}
             />
          </>
       );
@@ -100,9 +86,7 @@ export const UsersContainer = connect(
    {
       follow,
       unfollow,
-      setUsers,
       setCurrentPage,
-      toggleIsFetching,
-      toggleFollowingProgress
+      getUsers
    }
 )(UsersAPIContainer);
