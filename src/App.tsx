@@ -17,7 +17,7 @@ import { Login } from './components/Login/Login';
 const App = () => {
 
   const sideBar = useSelector<StateType, SideBarType>(state => state.sideBar)
-
+  //включаем 72 видео
   return (
       <div className='app-wrapper'>
         <HeaderContainer />
